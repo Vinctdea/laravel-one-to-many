@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\JobsRequest;
 use Illuminate\Http\Request;
+use App\Functions\Helper;
+
 use App\Models\Job;
 
 class JobController extends Controller
@@ -22,23 +25,27 @@ class JobController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.jobs.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(JobsRequest $request)
     {
-        //
+
+        $data = $request->all();
+        $data['slug'] = Helper::generateSlug($data['title'], Job::class);
+        $job = Job::create($data);
+        return redirect()->route('admin.jobs.show', $job);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Job $job)
     {
-        //
+        return view('admin.jobs.show', compact('job'));
     }
 
     /**

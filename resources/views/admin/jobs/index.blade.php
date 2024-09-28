@@ -22,8 +22,8 @@
                     <td>{{ $job->title }}</td>
                     <td>{{ $job->content }}</td>
                     <td>{{ $job->processing_time }}</td>
-                    <td>{{ $job->created_at }}</td>
-                    <td class=" table-dark">
+                    <td>{{ $job->created_at->format('d / m / Y') }}</td>
+                    <td class=" table-dark ">
                         <a href="{{ route('admin.jobs.show', ['job' => $job->id]) }}"
                             class="btn btn-outline-primary ">Dettagli</a>
                         <a href="{{ route('admin.jobs.edit', ['job' => $job->id]) }}"
