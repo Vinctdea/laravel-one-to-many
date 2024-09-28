@@ -2,7 +2,11 @@
 
 @section('content')
     <h1>Elenco di tutti i lavori</h1>
-    <table class="table">
+
+    @if (session('delete'))
+        <div class="alert alert-success">{{ session('delete') }}</div>
+    @endif
+    <table class="table ">
         <thead>
             <tr>
                 <th scope="col">#ID</th>
@@ -18,22 +22,17 @@
         <tbody>
             @foreach ($jobs as $job)
                 <tr>
-                    <td>{{ $job->id }}</td>
-                    <td>{{ $job->title }}</td>
-                    <td>{{ $job->content }}</td>
-                    <td>{{ $job->processing_time }}</td>
-                    <td>{{ $job->created_at->format('d / m / Y') }}</td>
+                    <td class=" table-primary ">{{ $job->id }}</td>
+                    <td class=" table-dark ">{{ $job->title }}</td>
+                    <td class=" table-primary ">{{ $job->content }}</td>
+                    <td class=" table-dark ">{{ $job->processing_time }}</td>
+                    <td class=" table-primary ">{{ $job->created_at->format('d / m / Y') }}</td>
                     <td class=" table-dark ">
                         <a href="{{ route('admin.jobs.show', ['job' => $job->id]) }}"
                             class="btn btn-outline-primary ">Dettagli</a>
                         <a href="{{ route('admin.jobs.edit', ['job' => $job->id]) }}"
                             class="btn btn-outline-warning align-content-around">Modifica</a>
-                        <form action="{{ route('admin.jobs.destroy', ['job' => $job->id]) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit" value="Elimina" class="btn btn-outline-danger">
-                        </form>
-
+                        @include('admin.partials.formdelelete')
                     </td>
 
                 </tr>
@@ -41,4 +40,8 @@
 
         </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+        {{ $jobs->links() }}
+
+    </div>
 @endsection

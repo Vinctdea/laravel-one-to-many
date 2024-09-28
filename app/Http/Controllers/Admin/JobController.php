@@ -16,7 +16,7 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = Job::orderBy('id', 'desc')->get();
+        $jobs = Job::orderBy('id', 'desc')->paginate(5);
         return view('admin.jobs.index', compact('jobs'));
     }
 
@@ -74,8 +74,10 @@ class JobController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Job  $job)
     {
-        //
+        $job->delete();
+
+        return redirect()->route('admin.jobs.index')->with('delete', 'Elemento ' . $job->title . ' è stato eliminato');
     }
 }

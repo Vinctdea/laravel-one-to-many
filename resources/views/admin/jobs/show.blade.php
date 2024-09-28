@@ -14,5 +14,11 @@
          </ul>
 
      </div>
-     <a class="btn btn-primary" href="{{ route('admin.jobs.index') }}">Torna all'elenco</a>
+     <div class="container-fluid d-flex justify-content-center">
+         <a class="btn btn-primary" href="{{ route('admin.jobs.index') }}">Torna all'elenco</a>
+         <a href="{{ route('admin.jobs.edit', ['job' => $job->id]) }}"
+             class="btn btn-warning align-content-around mx-3">Modifica</a>
+         @include('admin.partials.formdelelete')
+         </form>
+     </div>
  @endsection
