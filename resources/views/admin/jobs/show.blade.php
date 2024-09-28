@@ -1,6 +1,10 @@
  @extends('layouts.app')
 
  @section('content')
+     @if (session('message'))
+         <div class="alert alert-success">{{ session('message') }}</div>
+     @endif
+
      <h1>dettagli lavoro</h1>
      <div class="container-fluid m-4">
          <ul>

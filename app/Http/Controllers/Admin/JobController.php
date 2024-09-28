@@ -51,17 +51,24 @@ class JobController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Job $job)
     {
-        //
+        return view('admin.jobs.edit', compact('job'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(JobsRequest $request, Job $job)
     {
-        //
+        $data = $request->all();
+        if ($data['title'] != $job->title) {
+            $data['slug'] = helper::generateSlug($data['title'], Job::class);
+        }
+
+        $job->update($data);
+
+        return redirect()->route('admin.jobs.show', $job)->with('message', 'modifica avvenuta correttamente');
     }
 
     /**

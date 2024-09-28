@@ -10,7 +10,7 @@
                 <th scope="col">Descizione</th>
                 <th scope="col">Tempo di lavorazione WEEK</th>
                 <th scope="col">Data di inserimento</th>
-                <th class="table-dark" scope="col">azioni</th>
+                <th scope="col">azioni</th>
 
 
             </tr>
