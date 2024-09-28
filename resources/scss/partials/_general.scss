@@ -1,0 +1,22 @@
+header, aside{
+    a{
+        text-decoration: none;
+        color: white;
+        &:hover{
+            text-decoration: underline;
+        }
+
+    }
+}
+
+li{
+    list-style: none;
+}
+
+.wrapper{
+    height: calc(100vh - 105px);
+}
+aside{
+    width: 200px;
+    height: 100%;
+}
