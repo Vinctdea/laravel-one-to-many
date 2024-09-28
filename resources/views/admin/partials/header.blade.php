@@ -2,8 +2,9 @@
 
     {{-- left side --}}
     <div class="container-fluid d-flex text-bg-primary p-4 justify-content-between align-content-center">
+
         <div>
-            <a href="{{ route('home') }}" target="_blank">Vai al sito</a>
+            <a class="fs-2 " href="{{ route('home') }}" target="_blank">Vai al sito</a>
         </div>
 
         {{-- right side --}}
@@ -21,7 +22,6 @@
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('admin.home') }}">Home</a>
-                            <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profile') }}</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">

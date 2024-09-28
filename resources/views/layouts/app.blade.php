@@ -17,12 +17,14 @@
 <body>
     @include('admin.partials.header')
 
-    <div class="d-flex">
+    <div class="d-flex wrapper">
 
-        <div class="wrapper">
-            @include('admin.partials.aside')
+        <div>
+            @auth
+                @include('admin.partials.aside')
+            @endauth
         </div>
-        <div class="p-3">
+        <div class="p-3 ms_content">
             @yield('content')
         </div>
     </div>

@@ -15,8 +15,14 @@ li{
 
 .wrapper{
     height: calc(100vh - 105px);
+    overflow: hidden;
 }
 aside{
     width: 200px;
     height: 100%;
+    overflow: hidden;
+}
+
+.ms_content{
+    overflow: auto;
 }
