@@ -25,6 +25,17 @@
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
+
+        <div class="mb-3">
+            <label for="category">Categoria</label>
+            <select class="form-select" aria-label="Default select example" name="category_id" id="category">
+                <option value="">Seleziona una categoria</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" @if (old('category_id', $job->category?->id) == $category->id) selected @endif>
+                        {{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
         <div class="mb-3">
             <label for="content">Contenuto</label>
             <textarea type="text" class="form-control @error('content')

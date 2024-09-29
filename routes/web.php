@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Guest\PageController;
 use App\Http\Controllers\ProfileController;
@@ -27,6 +28,9 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('home');
         Route::resource('jobs', JobController::class);
+        Route::resource('categories', CategoryController::class);
+
+        Route::get('category-jobs', [CategoryController::class, 'categoryJobs'])->name('categoryJobs');
     });
 
 Route::middleware('auth')->group(function () {

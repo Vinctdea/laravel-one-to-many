@@ -9,6 +9,7 @@
      <div class="container-fluid m-4">
          <ul>
              <li><strong>Titolo:</strong> {{ $job->title }}</li>
+             <li><strong>Categoria:</strong> {{ $job->category ? $job->category->name : 'Nessuna categoria' }}</li>
              <li><strong>Descrizione:</strong> {{ $job->content }}</li>
              <li><strong>Tempo di realizzazione:</strong> {{ $job->processing_time }} settimane</li>
          </ul>

@@ -9,7 +9,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    public function posts()
+    public function jobs()
     {
         return $this->hasMany(Job::class);
     }

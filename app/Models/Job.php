@@ -17,5 +17,5 @@ class Job extends Model
 
 
 
-    protected $fillable = ['title', 'slug', 'content', 'processing_time'];
+    protected $fillable = ['title', 'category_id', 'slug', 'content', 'processing_time'];
 }

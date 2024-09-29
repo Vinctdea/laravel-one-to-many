@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\JobsRequest;
 use Illuminate\Http\Request;
 use App\Functions\Helper;
-
+use App\Models\Category;
 use App\Models\Job;
 
 class JobController extends Controller
@@ -25,7 +25,8 @@ class JobController extends Controller
      */
     public function create()
     {
-        return view('admin.jobs.create');
+        $categories = Category::all();
+        return view('admin.jobs.create', compact('categories'));
     }
 
     /**
@@ -53,7 +54,8 @@ class JobController extends Controller
      */
     public function edit(Job $job)
     {
-        return view('admin.jobs.edit', compact('job'));
+        $categories = Category::all();
+        return view('admin.jobs.edit', compact('job', 'categories'));
     }
 
     /**
