@@ -1,5 +1,4 @@
-<form action="{{ route('admin.jobs.destroy', $job) }}" method="POST"
-    onsubmit="return confirm('confermi di voler eliminare {{ $job->title }} ?')">
+<form action="{{ $route }}" method="POST" onsubmit="return confirm('{{ $message }}')">
     @csrf
     @method('DELETE')
     <input type="submit" value="Elimina" class="btn btn-outline-danger">

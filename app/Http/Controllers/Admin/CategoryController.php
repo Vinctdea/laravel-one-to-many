@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Functions\Helper;
 
 class CategoryController extends Controller
 {
@@ -14,6 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -29,7 +31,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Helper::generateSlug($data['name'], Category::class);
+        $category = Category::create($data);
+        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -51,17 +56,24 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category)
     {
-        //
+
+        $data = $request->all();
+        $data['slug'] = Helper::generateSlug($data['name'], Category::class);
+        $category->update($data);
+
+        return redirect()->route('admin.categories.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect()->route('admin.categories.index')->with('delete', 'Elemento ' . $category->name . ' è stato eliminato');
     }
 
     public function CategoryJobs()

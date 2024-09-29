@@ -36,7 +36,10 @@
                             class="btn btn-outline-primary ">Dettagli</a>
                         <a href="{{ route('admin.jobs.edit', ['job' => $job->id]) }}"
                             class="btn btn-outline-warning align-content-around">Modifica</a>
-                        @include('admin.partials.formdelelete')
+                        @include('admin.partials.formdelelete', [
+                            'route' => route('admin.jobs.destroy', $job),
+                            'message' => "confermi di voler eliminare $job->title ?",
+                        ])
                     </td>
 
                 </tr>

@@ -1,51 +1,59 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Elenco di tutti i lavori</h1>
+    <h1>Elenco categorie</h1>
 
     @if (session('delete'))
         <div class="alert alert-success">{{ session('delete') }}</div>
     @endif
-    <table class="table ">
-        <thead>
-            <tr>
-                <th scope="col">#ID</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Descizione</th>
-                <th scope="col">Tempo di lavorazione WEEK</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Data di inserimento</th>
-                <th scope="col">azioni</th>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <table class="table mt-5">
+
+                    <form class="d-flex justify-content-between mt-4" action="{{ route('admin.categories.store') }}"
+                        method="POST">
+                        @csrf
+                        <input placeholder="Aggiungi categoria" type="text" name="name" class="form-controll me-3">
+                        <button class="btn btn-primary" type="submit">Aggiungi</button>
+                    </form>
+                    <tbody>
+                        @foreach ($categories as $category)
+                            <tr>
+                                <td>
+                                    <form action="{{ route('admin.categories.update', $category) }}" method="POST"
+                                        id="form-edit-{{ $category->id }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="text" name="name" value="{{ $category->name }}">
+
+                                    </form>
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning" type="submit"
+                                        onclick="submitEdit({{ $category->id }})">Aggiorna</button>
+                                </td>
+                                <td>
+                                    @include('admin.partials.formdelelete', [
+                                        'route' => route('admin.categories.destroy', $category),
+                                        'message' => "confermi di voler eliminare  $category->name",
+                                    ])
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
 
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($jobs as $job)
-                <tr>
-                    <td class=" table-primary ">{{ $job->id }}</td>
-                    <td class=" table-dark ">{{ $job->title }}</td>
-                    <td class=" table-primary ">{{ $job->content }}</td>
-                    <td class=" table-dark ">{{ $job->processing_time }}</td>
-                    <td class=" table-secondary"> <span class="badge text-bg-primary ">
-                            {{ $job->category ? $job->category->name : 'Nessuna categoria' }} </span>
-                    </td>
-                    <td class=" table-primary ">{{ $job->created_at->format('d / m / Y') }}</td>
-                    <td class=" table-dark ">
-                        <a href="{{ route('admin.jobs.show', ['job' => $job->id]) }}"
-                            class="btn btn-outline-primary ">Dettagli</a>
-                        <a href="{{ route('admin.jobs.edit', ['job' => $job->id]) }}"
-                            class="btn btn-outline-warning align-content-around">Modifica</a>
-                        @include('admin.partials.formdelelete')
-                    </td>
-
-                </tr>
-            @endforeach
-
-        </tbody>
-    </table>
-    <div class="d-flex justify-content-center">
-        {{ $jobs->links() }}
-
+                </table>
+            </div>
+        </div>
     </div>
+
+    <script>
+        function submitEdit(id) {
+            const form = document.getElementById(`form-edit-${id}`)
+            form.submit();
+        }
+    </script>
 @endsection
